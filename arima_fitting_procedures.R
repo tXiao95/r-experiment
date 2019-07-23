@@ -22,6 +22,7 @@ drift <- 0
 # loop through and create the 3:1000th values:
 for(i in 3:n){
   message(i)
+  rw[i]       <- rw[i-1] + eps[i] + drift
   ar1[i]      <- beta1 * ar1[i - 1] + eps[i] + drift
   ma1[i]      <- beta1 * eps[i - 1] + eps[i] + drift
   arma11[i]   <- beta1 * arma11[i - 1] + beta1 * eps[i - 1] + eps[i]  + drift
