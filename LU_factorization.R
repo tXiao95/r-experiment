@@ -1,7 +1,9 @@
 A <- matrix(rpois(9, 2), nrow=3, ncol=3, byrow=T)
 b <- c(2,2,2)
 
-A[1,1] <- 0
+A[1,1] <- 1e-20
+
+A <- matrix(c(1,-1,2,-1,5,0,2,0,9),nrow=3)
 
 LU_factorization <- function(A){
   #' @description LU factorization of a square matrix A, without partial pivoting
@@ -66,8 +68,8 @@ solve_LU <- function(A, b){
   for (i in (n-1):1){
     diff <- y[i]
     for (j in n:(i+1)){
-      # y[i] = U[i,1]*x[1] + L[i,2]*x[2] + ... + L[i,i]*y[i]
-      # y[i] - U[i,1]*x[1] - L[i,2]*x[2] - ... - L[i,i-1]*y[i-1] = L[i,i]*y[i]
+      # y[i] = U[i,1]*x[1] + U[i,2]*x[2] + ... + U[i,i]*y[i]
+      # y[i] - U[i,1]*x[1] - U[i,2]*x[2] - ... - U[i,i-1]*y[i-1] = U[i,i]*y[i]
       diff <- diff - U[i,j]*x[j]
     }
     x[i] <- diff / U[i,i]
@@ -75,3 +77,5 @@ solve_LU <- function(A, b){
   
   list(x=x, y=y,L=L, U=U)
 }
+
+solve_LU(A, b)

@@ -99,3 +99,8 @@ p6 <- plot_pseudospectra(A, title = "Vandermonde (seq(0,1,.1))") + coord_fixed(y
 
 grid.arrange(p1,p2,p3,p4,p5,p6,nrow=2)
 dev.off()
+
+# dt <- data.table(t = 1:50)
+# dt[, e := sapply(t, function(t) norm(pracma::expm(t*A),"2"))]
+# pracma::semilogy(dt$t, dt$e)
+# ggplot()
